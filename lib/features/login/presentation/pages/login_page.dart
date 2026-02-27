@@ -1,4 +1,7 @@
+import 'package:app_testes_unitarios/features/login/presentation/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,6 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final controller = GetIt.I<LoginController>();
+
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             Text('Login', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             TextField(
+              controller: userNameController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'E-mail',
@@ -28,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller:  passwordController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: Icon(Icons.visibility),
@@ -36,15 +47,25 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black
-                ),
-                onPressed: (){}, 
-                child: Text('Login', style: TextStyle(color: Colors.white, fontSize: 15))),
+            Observer(
+              builder: (_){
+                if(controller.isLoading){
+                  return CircularProgressIndicator();
+                } 
+              
+              return SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black
+                  ),
+                  onPressed: (){
+                    controller.login(userNameController.text, passwordController.text);
+                  }, 
+                  child: Text('Login', style: TextStyle(color: Colors.white, fontSize: 15))),
+              );
+              },
             )
           ],
         ),

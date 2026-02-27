@@ -1,8 +1,9 @@
+import 'package:app_testes_unitarios/core/inejection/injection.dart';
 import 'package:app_testes_unitarios/features/login/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:app_testes_unitarios/features/login/presentation/pages/login_page.dart';
 
 void main() {
+  setupInjection();
   runApp(const MyApp());
 }
 
