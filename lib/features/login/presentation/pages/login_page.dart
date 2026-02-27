@@ -61,6 +61,11 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.black
                   ),
                   onPressed: (){
+                    if(controller.errorMessage != null){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(controller.errorMessage!))
+                      );
+                    }
                     controller.login(userNameController.text, passwordController.text);
                   }, 
                   child: Text('Login', style: TextStyle(color: Colors.white, fontSize: 15))),
