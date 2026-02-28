@@ -1,5 +1,5 @@
 import 'package:app_testes_unitarios/core/inejection/injection.dart';
-import 'package:app_testes_unitarios/features/login/presentation/pages/login_page.dart';
+import 'package:app_testes_unitarios/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LoginPage()
+      home: HomePage()
     );
   }
 }
