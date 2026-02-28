@@ -11,13 +11,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Center(child: Text('Drawer Content')),
+      ),
       appBar: AppBar(
-        leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/105419583?v=4'),
-            ),
-          )
+        leading: Builder(
+          builder: (context) {
+            return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/105419583?v=4'),
+                  ),
+                ),
+              );
+          }
+        )
       ),
       body: Center(
         child: GridView.count(
