@@ -8,6 +8,7 @@ abstract class HomeDatasource {
   
   Future<ProductsResponseModel> getProdutos();
   Future<ProductDetailsModel> getProdutoDetalhes({required int id});
+  Future<ProductsResponseModel> pesquisaProduto({required String produto});
 }
 
 class HomeRemoteDataSourceImpl implements HomeDatasource {
@@ -37,6 +38,21 @@ class HomeRemoteDataSourceImpl implements HomeDatasource {
     if (response.statusCode == 200) {
       print(response.body);
       return ProductDetailsModel.fromJson(jsonDecode(response.body));
+    } else {
+      print('Deu erro aqui mané: ${response.statusCode}');
+      throw Exception('Erro ao buscar produto');
+    }
+  }
+
+
+  @override
+  Future<ProductsResponseModel> pesquisaProduto({required String produto}) async {
+    final response = await client.get(
+      Uri.parse('https://dummyjson.com/products/search?q=$produto'),
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      return ProductsResponseModel.fromJson(jsonDecode(response.body));
     } else {
       print('Deu erro aqui mané: ${response.statusCode}');
       throw Exception('Erro ao buscar produto');

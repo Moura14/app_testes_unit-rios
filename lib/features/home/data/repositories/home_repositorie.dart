@@ -8,6 +8,7 @@ abstract class HomeRepositories {
   
   Future<ProductsResponseModel> getProduto();
   Future<ProductDetailsModel> getProdutoDetalhes({required int id});
+  Future<ProductsResponseModel> pesquisaProduto({required String produto});
   
 }
 
@@ -27,6 +28,11 @@ class HomeRepositoriesImpl implements HomeRepositories {
    @override
   Future<ProductDetailsModel> getProdutoDetalhes({required int id}) async {
     return await homeDatasource.getProdutoDetalhes(id: id);
+  }
+
+   @override
+  Future<ProductsResponseModel> pesquisaProduto({required String produto}) async {
+    return await homeDatasource.pesquisaProduto(produto: produto);
   }
 
 

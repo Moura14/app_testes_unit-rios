@@ -23,6 +23,7 @@ abstract class _HomeController with Store {
   @observable
   ProductDetailsModel? productDetailsModel;
 
+
   @observable
   String? errorMessage;
 
@@ -33,7 +34,7 @@ abstract class _HomeController with Store {
       final response = await homeUseCase.getProdutos();
       products = response.products;
       if (products.isEmpty) {
-        // added logging for debugging
+        
         print('getProduto: received empty product list');
       }
     } catch (e) {
@@ -54,5 +55,17 @@ abstract class _HomeController with Store {
     }
     isLoading = false;
   }
+
+  @action
+  Future<void> pesquisaProduto({required String produto}) async {
+    isLoading = true;
+    try {
+      final response = await homeUseCase.pesquisaProduto(produto: produto);
+      products = response.products;
+    } catch (e) {
+      errorMessage = e.toString();
+    }
+    isLoading = false;
   
+}
 }

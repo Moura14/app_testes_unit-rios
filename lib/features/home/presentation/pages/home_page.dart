@@ -54,6 +54,15 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       appBar: AppBar(
+        title: TextField(
+          decoration: InputDecoration(
+            hintText: 'Pesquisar',
+            border: InputBorder.none,
+          ),
+          onChanged: (value){
+           homeController.pesquisaProduto(produto: value);
+          },
+        ),
         leading: Builder(
           builder: (context) {
             return Padding(
@@ -72,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Observer(
         builder: (_){
-          print('Observer rebuilding - isLoading: ${homeController.isLoading}, products count: ${homeController.products.length}');
+        
           
           if(homeController.isLoading){
             return Center(child: CircularProgressIndicator());
@@ -82,7 +91,7 @@ class _HomePageState extends State<HomePage> {
             return const Center(child: Text('Nenhum produto disponível'));
           }
           
-          print('Renderizando grid com ${homeController.products.length} produtos');
+      
           return GridView.builder(
             padding: const EdgeInsets.all(16),
             shrinkWrap: true,

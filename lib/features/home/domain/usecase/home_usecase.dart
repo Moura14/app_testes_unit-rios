@@ -14,4 +14,8 @@ class HomeUsecase {
   Future<ProductDetailsModel> getProdutoDetalhes({required int id}) async {
     return await repositories.getProdutoDetalhes(id: id);
   }
+
+  Future<ProductsResponseModel> pesquisaProduto({required String produto}) async {
+    return await repositories.pesquisaProduto(produto: produto);
+  }
 }
